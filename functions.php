@@ -1,27 +1,20 @@
 <?php
 
+//postgresqlに接続
+function postgresql_connect() {
 
-function postgresql_db_connect() {
-
-$dbh = pg_connect("host=localhost port=5432 dbname=todolist user=postgres password=postgresql");
-
-return $dbh;
+	$conn = pg_connect("host=localhost user=postgres");
+	return $conn;
 
 }
 
-/*
-function db_connect() {
+//postgresqlに接続
+function postgresql_db_connect($db_name) {
+try{
+	$conn = pg_connect("host=localhost port=5432 dbname={$db_name} user=postgres password=postgresql");
+	return $conn;
 
-    $dsn = 'mysql:dbname=todolist;host=localhost;charset=utf8';
-    $user = 'root';
-    $password = '';
-
-    $dbh = new PDO($dsn, $user, $password);
-
-    $dbh->query('SET NAMES utf8');
-    $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-
-    return $dbh;
+}catch(Exception $e){
+	echo $e;
 }
-*/
-
+}
